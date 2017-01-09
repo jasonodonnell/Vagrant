@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.ssh.insert_key = false
+    config.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "2048"]
+    end
+
+    config.vm.define "psql" do |psql|
+        psql.vm.hostname = "orc-psql.dev"
+        psql.vm.box = "centos/7"
+        psql.vm.network :private_network, ip: "192.168.60.4"
+        
+        Dir['scripts/*'].each do |fname|
+            psql.vm.provision :file do |file|
+                file.source = fname
+                file.destination = "/home/vagrant/" + File.basename(fname)
+            end
+        end
+
+        Dir['patch/*'].each do |fname|
+            psql.vm.provision :file do |file|
+                file.source = fname
+                file.destination = "/home/vagrant/" + File.basename(fname)
+            end
+        end
+        
+        psql.vm.provision "shell", inline: <<-SHELL
+            sudo yum -y update
+            sudo /home/vagrant/pre_setup.sh
+        SHELL
+    end
+end
