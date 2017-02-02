@@ -1,17 +1,18 @@
 #!/bin/bash
+#!/bin/bash
 
-POSTGRES_GIT='git://git.postgresql.org/git/postgresql.git'
-HOME_DIR='/home/vagrant'
-SOURCE_DIR="${HOME_DIR?}/postgres"
-BUILD_DIR="${HOME_DIR?}/build"
-BIN_PATH='PATH=${PATH}:/home/vagrant/pg/bin'
-BASHRC="${HOME_DIR?}/.bashrc"
 USER='vagrant'
 GROUP='vagrant'
+POSTGRES_GIT='git://git.postgresql.org/git/postgresql.git'
+HOME_DIR="/home/${USER?}"
+SOURCE_DIR="${HOME_DIR?}/postgres"
+BUILD_DIR="${HOME_DIR?}/build"
+BIN_PATH="PATH=${PATH}:/home/${USER?}/pg/bin"
+BASHRC="${HOME_DIR?}/.bashrc"
 
 # Install Dependencies/Tools
 echo "Installing Tools.."
-yum -y install vim git 
+yum -y install vim git
 
 echo "Installing PostgreSQL Dependencies.."
 yum -y install zlib-devel readline-devel \
