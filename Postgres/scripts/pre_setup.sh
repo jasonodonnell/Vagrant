@@ -33,7 +33,7 @@ cd ${BUILD_DIR?}
 # Configure Postgres
 echo "Configure Postgres.."
 ${SOURCE_DIR?}/configure \
-    --prefix=/home/vagrant/pg \
+    --prefix="/home/${USER?}/pg" \
     --enable-cassert \
     --enable-tap-tests \
     --with-openssl
