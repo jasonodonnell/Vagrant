@@ -1,0 +1,13 @@
+---
+- name: postgres
+  box: centos/7
+  hostname: "orc-postgres.dev"
+  ip: 172.17.8.100
+  job: postgres
+  ram: 2048
+- name: prometheus
+  box: centos/7
+  hostname: "orc-prometheus.dev"
+  ip: 172.17.8.101
+  job: prometheus
+  ram: 2048

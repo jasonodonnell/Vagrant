@@ -1,0 +1,17 @@
+[Unit]
+Description=Postgres Exporter Server
+After=network.target
+
+[Service]
+WorkingDirectory=/var/lib/prometheus/postgres_exporter
+Environment="DATA_SOURCE_NAME=postgresql://postgres_exporter@localhost:5432/postgres?sslmode=disable"
+PermissionsStartOnly=true
+ExecStartPre=/bin/chown -R prometheus:prometheus /var/lib/prometheus/postgres_exporter
+User=prometheus
+ExecStart=/var/lib/prometheus/postgres_exporter/postgres_exporter \
+     -extend.query-path=/var/lib/prometheus/postgres_exporter/queries.yml
+ExectStop=/usr/bin/kill -9 $(pidof postgres_exporter)
+
+Restart=always
+[Install]
+WantedBy=multi-user.target

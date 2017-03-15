@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus Server
+After=network.target
+
+[Service]
+WorkingDirectory=/var/lib/prometheus
+PermissionsStartOnly=true
+ExecStartPre=/bin/chown -R prometheus:prometheus /var/lib/prometheus
+User=prometheus
+ExecStart=/var/lib/prometheus/prometheus \
+        -config.file=/var/lib/prometheus/prometheus.yml
+ExectStop=/usr/bin/kill -9 $(pidof prometheus)
+
+Restart=always
+[Install]
+WantedBy=multi-user.target
