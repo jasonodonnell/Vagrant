@@ -12,7 +12,7 @@ This is the virtualization blueprint to deploy:
 
 ```bash
 $ git clone git@github.com:jasonodonnell/Vagrant.git
-$ cd ./Prometheus/Vagrant
+$ cd ./Prometheus
 $ vagrant up
 ```
 
