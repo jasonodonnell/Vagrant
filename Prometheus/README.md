@@ -11,7 +11,7 @@ This is the virtualization blueprint to deploy:
 ## Deploy
 
 ```bash
-$ git@github.com:jasonodonnell/Vagrant.git
+$ git clone git@github.com:jasonodonnell/Vagrant.git
 $ cd ./Prometheus/Vagrant
 $ vagrant up
 ```
